@@ -15,12 +15,13 @@ public class PanelController : MonoBehaviour
 
 	private void Awake()
 	{
-		Debug.Log(this.gameObject.name + " previous layer is not added! You Must Set previous Layer !!!");
+		if(previousLayer == null) Debug.Log(this.gameObject.name + " previous layer is not added! You Must Set previous Layer !!!");
 	}
+
 	public void Start()
 	{
 		currentLayer = this.gameObject;
-		LayerManager.Instance.SetLayer(this.gameObject, LayerManager.Instance.previousLayer, nextLayer[0]);
+		if(nextLayer.Length != 0) LayerManager.Instance.SetLayer(this.gameObject, LayerManager.Instance.previousLayer, nextLayer[0]);
 	}
 
 	private void Update()
