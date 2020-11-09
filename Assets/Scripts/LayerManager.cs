@@ -30,41 +30,7 @@ public class LayerManager : MonoBehaviour
 
 	public float logoShowTime;
 
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.Space)) PlayFadeInOut();
-	}
-
-	IEnumerator Logo()
-	{
-		Debug.Log("Logo Layer is Played!");
-
-		yield return new WaitForSeconds(logoShowTime);
-
-		StartCoroutine(Main());
-	}
-
-	IEnumerator Main()
-	{
-		Debug.Log("Main Layer is Played!");
-
-		while(!isTouched)
-		{
-			if (Input.GetMouseButtonDown(0)) isTouched = true;
-			yield return null;
-		}
-
-		StartCoroutine(TeamPlay());
-	}
-
-	IEnumerator TeamPlay()
-	{
-		Debug.Log("TeamPlay Layer is Played!");
-
-		yield return null;
-	}
-
-	public void PlayFadeInOut()
+	public void PlayTransition()
 	{
 		fadeImageAnimator.SetTrigger("FadeInOut");
 		Invoke("ShowNextLayer", .25f);
@@ -75,12 +41,10 @@ public class LayerManager : MonoBehaviour
 
 	public void ShowNextLayer()
 	{
-		layers[layerIndex].SetActive(false);
+		previousLayer.SetActive(false);
 		layerIndex = (layerIndex + 1) % layers.Length;
-		layers[layerIndex].SetActive(true);
+		currentLayer.SetActive(true);
 	}
-
-
 
 	public GameObject currentLayer;
 	public GameObject previousLayer;
@@ -97,9 +61,6 @@ public class LayerManager : MonoBehaviour
 	{
 		previousLayer = _current;
 		currentLayer = _next;
-		Debug.Log(currentLayer.name);
-
-		previousLayer.SetActive(false);
-		currentLayer.SetActive(true);
+		PlayTransition();
 	}
 }

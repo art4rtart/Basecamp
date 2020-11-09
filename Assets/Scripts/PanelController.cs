@@ -40,4 +40,10 @@ public class PanelController : MonoBehaviour
 		LayerManager.Instance.ChangeLayer(currentLayer, previousLayer);
 	}
 
+	public void GoTeamInfoDisplay(TeamInfo _teamInfo)
+	{
+		Debug.Log(_teamInfo);
+		TeamInfoDisplayer.Instance.teamInfo = _teamInfo;
+		LayerManager.Instance.ChangeLayer(currentLayer, nextLayer[Mathf.Clamp(0, 0, nextLayer.Length)]);
+	}
 }
