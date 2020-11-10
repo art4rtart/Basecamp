@@ -13,6 +13,7 @@ public enum Subject
 public enum Tool
 {
 	DirectX12,
+	OpenGL,
 	Unreal,
 	Unity,
 }
@@ -39,8 +40,12 @@ public class TeamInfo : MonoBehaviour
 
 	public string currentDate;
 
+	Image image;
+
 	private void Awake()
 	{
+		image = GetComponent<Image>();
+
 		posKR = new string[recriutPosition.Length];
 
 		subject.ToString();

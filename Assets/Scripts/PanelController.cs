@@ -13,9 +13,14 @@ public class PanelController : MonoBehaviour
 	public GameObject[] nextLayer;
 	int nextLayerIndex;
 
+	[Header("Auto Layer Change")]
+	public bool auto;
+	public float waitTime;
+
 	private void Awake()
 	{
 		if(previousLayer == null) Debug.Log(this.gameObject.name + " previous layer is not added! You Must Set previous Layer !!!");
+		if (auto) StartCoroutine(ChangeLayer(waitTime));
 	}
 
 	public void Start()
@@ -45,5 +50,11 @@ public class PanelController : MonoBehaviour
 		Debug.Log(_teamInfo);
 		TeamInfoDisplayer.Instance.teamInfo = _teamInfo;
 		LayerManager.Instance.ChangeLayer(currentLayer, nextLayer[Mathf.Clamp(0, 0, nextLayer.Length)]);
+	}
+
+	IEnumerator ChangeLayer(float _waitTime)
+	{
+		yield return new WaitForSeconds(_waitTime);
+		GoNextLayer(nextLayerIndex);
 	}
 }
