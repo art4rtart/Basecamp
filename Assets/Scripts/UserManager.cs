@@ -22,4 +22,28 @@ public class UserManager : MonoBehaviour
 	public string department;
 
 	public bool hasApplyed;
+	public bool hasVolunteer;
+
+	public float timeLeft;
+
+	private void Update()
+	{
+		if (hasApplyed)
+		{
+			if(timeLeft > 0) timeLeft = Mathf.Clamp(timeLeft -= Time.deltaTime, 0, 1000);
+		}
+	}
+
+	public TeamInfo teamInfo;
+
+	public void SetApplyedTeamInfo(TeamInfo _teamInfo)
+	{
+		teamInfo = _teamInfo;
+	}
+
+	public bool IsSameTeam()
+	{
+		if (teamInfo == TeamInfoDisplayer.Instance.teamInfo) { Debug.Log("this is applyed team");  return true; }
+		else return false;
+	}
 }

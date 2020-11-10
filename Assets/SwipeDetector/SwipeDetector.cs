@@ -4,7 +4,18 @@ using TMPro;
 
 public class SwipeDetector : MonoBehaviour
 {
-    private Vector2 fingerDownPosition;
+	public static SwipeDetector Instance
+	{
+		get
+		{
+			if (instance != null) return instance;
+			instance = FindObjectOfType<SwipeDetector>();
+			return instance;
+		}
+	}
+	private static SwipeDetector instance;
+
+	private Vector2 fingerDownPosition;
     private Vector2 fingerUpPosition;
 
     [SerializeField]
@@ -17,59 +28,54 @@ public class SwipeDetector : MonoBehaviour
 
     private void Update()
     {
-        foreach (Touch touch in Input.touches)
+		foreach (Touch touch in Input.touches)
         {
             if (touch.phase == TouchPhase.Began)
             {
                 fingerUpPosition = touch.position;
                 fingerDownPosition = touch.position;
-            }
+				tmpro.text = "Is Down";
+				isSwiping = true;
+			}
 
             if (!detectSwipeOnlyAfterRelease && touch.phase == TouchPhase.Moved)
             {
                 fingerDownPosition = touch.position;
-                DetectSwipe();
-            }
+				tmpro.text = "Is Moveing!";
+				isSwiping = true;
+			}
 
             if (touch.phase == TouchPhase.Ended)
             {
                 fingerDownPosition = touch.position;
                 DetectSwipe();
-            }
+				tmpro.text = "Is Up";
+				isSwiping = false;
+			}
         }
     }
 
-	public GameObject Contents;
-
-	float prevFingerPos;
-	float currentFingerPos;
-	bool isFirstTime =  true;
+	public bool isSwiping = false;
+	public TextMeshProUGUI tmpro;
 
     private void DetectSwipe()
     {
-		currentFingerPos = fingerDownPosition.x;
-		if (isFirstTime) { prevFingerPos = currentFingerPos; isFirstTime = false; }
-
 		if (SwipeDistanceCheckMet())
         {
             if (IsVerticalSwipe())
             {
                 var direction = fingerDownPosition.y - fingerUpPosition.y > 0 ? SwipeDirection.Up : SwipeDirection.Down;
                 SendSwipe(direction);
-            }
+				tmpro.text = "Vertical Swap!";
+			}
             else
             {
                 var direction = fingerDownPosition.x - fingerUpPosition.x > 0 ? SwipeDirection.Right : SwipeDirection.Left;
                 SendSwipe(direction);
-
-				if (direction == SwipeDirection.Right) Contents.transform.position += Vector3.forward * Mathf.Abs(currentFingerPos - prevFingerPos);
-				else Contents.transform.position -= Vector3.forward * Mathf.Abs(currentFingerPos - prevFingerPos);
-
+				tmpro.text = "Horizontal Swap!";
 			}
             fingerUpPosition = fingerDownPosition;
         }
-
-		prevFingerPos = currentFingerPos;
 	}
 
     private bool IsVerticalSwipe()
