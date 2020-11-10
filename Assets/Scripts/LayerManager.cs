@@ -43,7 +43,7 @@ public class LayerManager : MonoBehaviour
 	{
 		previousLayer.SetActive(false);
 		layerIndex = (layerIndex + 1) % layers.Length;
-		currentLayer.SetActive(true);
+		if (currentLayer.activeSelf != true) currentLayer.SetActive(true);
 	}
 
 	public GameObject currentLayer;
