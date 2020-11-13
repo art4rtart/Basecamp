@@ -55,6 +55,7 @@ public class PanelController : MonoBehaviour
 	IEnumerator ChangeLayer(float _waitTime)
 	{
 		yield return new WaitForSeconds(_waitTime);
-		GoNextLayer(nextLayerIndex);
+		if (!UserManager.Instance.hasTeam) GoNextLayer(nextLayerIndex);
+		else GoNextLayer(nextLayerIndex + 1);
 	}
 }

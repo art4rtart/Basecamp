@@ -21,6 +21,8 @@ public class UserManager : MonoBehaviour
 	public string position;
 	public string department;
 
+	public bool hasTeam;
+
 	public bool hasApplyed;
 	public bool hasVolunteer;
 

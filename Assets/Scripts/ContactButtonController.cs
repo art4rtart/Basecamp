@@ -64,7 +64,7 @@ public class ContactButtonController : MonoBehaviour
 				colors.normalColor = normalColor;
 				button.colors = colors;
 			}
-
+			
 			string minutes = Mathf.Floor(UserManager.Instance.timeLeft / 60).ToString("00");
 			string seconds = (UserManager.Instance.timeLeft % 60).ToString("00");
 			timeLeftText.text = string.Format("{0}:{1} 이후 취소 가능", minutes, seconds);

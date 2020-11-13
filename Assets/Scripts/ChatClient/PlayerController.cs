@@ -1,0 +1,46 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour
+{
+    public Transform camTransform;
+
+ //   private void Update()
+ //   {
+	//	if (Input.GetKeyDown(KeyCode.Mouse0))
+ //       {
+ //           ClientSend.PlayerShoot(camTransform.forward);
+ //       }
+
+ //       if (Input.GetKeyDown(KeyCode.Mouse1))
+ //       {
+ //           ClientSend.PlayerThrowItem(camTransform.forward);
+ //       }
+	//}
+
+	private void FixedUpdate()
+	{
+		SendInputToServer();
+	}
+
+	/// <summary>Sends player input to the server.</summary>
+	private void SendInputToServer()
+	{
+		bool[] _inputs = new bool[]
+		{
+			Input.GetKey(KeyCode.W),
+			Input.GetKey(KeyCode.S),
+			Input.GetKey(KeyCode.A),
+			Input.GetKey(KeyCode.D),
+			Input.GetKey(KeyCode.Space),
+			Input.GetKey(KeyCode.LeftShift),
+			Input.GetKey(KeyCode.R),
+			Input.GetKey(KeyCode.T),
+			Input.GetKey(KeyCode.Alpha1),
+			Input.GetKey(KeyCode.Alpha2),
+		};
+
+		ClientSend.PlayerMovement(_inputs);
+	}
+}

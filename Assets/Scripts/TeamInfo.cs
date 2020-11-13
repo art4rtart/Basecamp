@@ -28,7 +28,7 @@ public enum Position
 
 public class TeamInfo : MonoBehaviour
 {
-	[SerializeField] private string title;
+	public string title;
 	[SerializeField] private Subject subject;
 	[SerializeField] private Tool tool;
 	[SerializeField] private int recruitNum;
@@ -41,6 +41,11 @@ public class TeamInfo : MonoBehaviour
 	public string currentDate;
 
 	Image image;
+
+	[HideInInspector] public string positions;
+
+	[TextArea(0,10)]
+	public string introduce;
 
 	private void Awake()
 	{
@@ -56,16 +61,17 @@ public class TeamInfo : MonoBehaviour
 
 		for(int i = 0; i < posKR.Length; i++)
 		{
-			position += posKR[i].ToString();
-			if ( i < posKR.Length - 1) position  +=  ", ";
+			positions += posKR[i].ToString();
+			if ( i < posKR.Length - 1) positions +=  ", ";
 		}
-		position += ")";
+
+		position += positions + ")";
 
 		currentDate = GetCurrentDate() + " " + GetDay(DateTime.Now);
 
 		Debug.Log(subjectKR);
 		Debug.Log(toolKR);
-		Debug.Log(num + position);
+		Debug.Log(num + "명 " + position);
 	}
 
 	void Trans(Subject _subject, Tool _tool, Position[] _position)
@@ -83,13 +89,16 @@ public class TeamInfo : MonoBehaviour
 		switch (_tool)
 		{
 			case Tool.DirectX12:
-				toolKR = "다이렉트X";
+				toolKR = "DirectX12";
 				break;
 			case Tool.Unreal:
 				toolKR = "언리얼 엔진";
 				break;
 			case Tool.Unity:
 				toolKR = "유니티 엔진";
+				break;
+			case Tool.OpenGL:
+				toolKR = "OpenGL";
 				break;
 		}
 
