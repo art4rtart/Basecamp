@@ -642,6 +642,8 @@ MonoBehaviour:
   currentLayer: {fileID: 0}
   nextLayer:
   - {fileID: 1101808184}
+  auto: 0
+  waitTime: 0
 --- !u!1 &68427553
 GameObject:
   m_ObjectHideFlags: 0
@@ -1143,6 +1145,8 @@ MonoBehaviour:
   previousLayer: {fileID: 545695063}
   currentLayer: {fileID: 0}
   nextLayer: []
+  auto: 0
+  waitTime: 0
 --- !u!114 &94907751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5247,6 +5251,8 @@ MonoBehaviour:
   previousLayer: {fileID: 1040236643}
   currentLayer: {fileID: 0}
   nextLayer: []
+  auto: 0
+  waitTime: 0
 --- !u!114 &412885651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6784,6 +6790,8 @@ MonoBehaviour:
   - {fileID: 1816994291}
   - {fileID: 1108474505}
   - {fileID: 94907748}
+  auto: 0
+  waitTime: 0
 --- !u!114 &545695066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9056,6 +9064,8 @@ MonoBehaviour:
   previousLayer: {fileID: 1101808184}
   currentLayer: {fileID: 0}
   nextLayer: []
+  auto: 0
+  waitTime: 0
 --- !u!224 &787298066 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7860514790903616915, guid: f5dc12aed8a55c6498605613f0aaa46e, type: 3}
@@ -9330,6 +9340,8 @@ MonoBehaviour:
   previousLayer: {fileID: 94907748}
   currentLayer: {fileID: 0}
   nextLayer: []
+  auto: 0
+  waitTime: 0
 --- !u!114 &841047824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12516,6 +12528,8 @@ MonoBehaviour:
   nextLayer:
   - {fileID: 412885648}
   - {fileID: 545695063}
+  auto: 0
+  waitTime: 0
 --- !u!114 &1040236646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12648,6 +12662,8 @@ MonoBehaviour:
   nextLayer:
   - {fileID: 1356421460}
   - {fileID: 1040236643}
+  auto: 0
+  waitTime: 0
 --- !u!1 &1046255294
 GameObject:
   m_ObjectHideFlags: 0
@@ -13642,6 +13658,8 @@ MonoBehaviour:
   - {fileID: 784491193}
   - {fileID: 1313544358}
   - {fileID: 1115927150}
+  auto: 0
+  waitTime: 0
 --- !u!1 &1108474505
 GameObject:
   m_ObjectHideFlags: 0
@@ -13697,6 +13715,8 @@ MonoBehaviour:
   previousLayer: {fileID: 545695063}
   currentLayer: {fileID: 0}
   nextLayer: []
+  auto: 0
+  waitTime: 0
 --- !u!114 &1108474508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13903,6 +13923,8 @@ MonoBehaviour:
   currentLayer: {fileID: 0}
   nextLayer:
   - {fileID: 1040236643}
+  auto: 0
+  waitTime: 0
 --- !u!114 &1115927153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16306,6 +16328,8 @@ MonoBehaviour:
   previousLayer: {fileID: 1101808184}
   currentLayer: {fileID: 0}
   nextLayer: []
+  auto: 0
+  waitTime: 0
 --- !u!1 &1315413103
 GameObject:
   m_ObjectHideFlags: 0
@@ -17379,6 +17403,8 @@ MonoBehaviour:
   currentLayer: {fileID: 0}
   nextLayer:
   - {fileID: 57790678}
+  auto: 0
+  waitTime: 0
 --- !u!224 &1394453673 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7860514790903616915, guid: f5dc12aed8a55c6498605613f0aaa46e, type: 3}
@@ -22833,6 +22859,8 @@ MonoBehaviour:
   previousLayer: {fileID: 0}
   currentLayer: {fileID: 0}
   nextLayer: []
+  auto: 0
+  waitTime: 0
 --- !u!95 &1765677864
 Animator:
   serializedVersion: 3
@@ -23422,6 +23450,8 @@ MonoBehaviour:
   previousLayer: {fileID: 545695063}
   currentLayer: {fileID: 0}
   nextLayer: []
+  auto: 0
+  waitTime: 0
 --- !u!114 &1816994294
 MonoBehaviour:
   m_ObjectHideFlags: 0
