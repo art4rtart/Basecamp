@@ -29,7 +29,6 @@ public class RESTAPI : MonoBehaviour
 
     IEnumerator Github_GET()
     {
-        //string url = "https://api.github.com/users/her0iin/repos";
         string url = "https://api.github.com/repos/her0iin/basecamp/commits";
 
         UnityWebRequest www = UnityWebRequest.Get(url);
