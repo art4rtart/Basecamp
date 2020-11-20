@@ -10,6 +10,10 @@ using Newtonsoft.Json.Linq;
 
 public class JsonNET : MonoBehaviour
 {
+    public string[] names;
+    public int[] CommitCntByName;
+    public int CommitCnt;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,12 +47,21 @@ public class JsonNET : MonoBehaviour
             string response = System.Text.Encoding.UTF8.GetString(www.downloadHandler.data);
             
             var myDeserializedClass = JsonConvert.DeserializeObject<List<MyArray>>(response);
-            Debug.Log(myDeserializedClass.Count);
 
-            for (int i = 0; i < myDeserializedClass.Count; ++i)
-            {
-                Debug.Log(myDeserializedClass[i].commit.author.name + " " + myDeserializedClass[i].commit.message);
+            CommitCntByName = new int[names.Length];
+            int[] nameCnt = new int[names.Length];
+            for (int i = 0; i < names.Length; ++i) {
+                // 이름별 커밋회수
+                for (int j = 0; j < myDeserializedClass.Count; ++j) { 
+                    if (myDeserializedClass[j].commit.author.name.Equals(names[i])) nameCnt[i]++;
+                }
+                CommitCntByName[i] = nameCnt[i];
+                //Debug.Log(CommitCntByName[i]);
             }
+
+            // 전체 커밋 회수
+            CommitCnt = myDeserializedClass.Count;
+            //Debug.Log(CommitCnt);
         }
         else
         {

@@ -16,9 +16,24 @@ public class CircleGraph : MonoBehaviour
     void Start()
     {
         // Github Script
-        //var Data = GameObject.Find("").GetComponent<>();
+        var Data = GameObject.Find("Github_Manager").GetComponent<JsonNET>();
+        names = Data.names;
+        Debug.Log(names.Length);
 
-        
+        nameColors = new Color[names.Length];
+        for (int i = 0; i < names.Length; ++i)
+        {
+            float rgb = Random.Range(0.0f, 1.0f);
+            nameColors[i] = new Color(rgb, rgb, rgb);
+        }
+
+        CommitCntByName = new int[names.Length];
+        CommitCntByName = Data.CommitCntByName;
+        Debug.Log(CommitCntByName.Length);
+
+        CommitCnt = Data.CommitCnt;
+
+        MakeGraph();
     }
     private void Update()
     {
@@ -38,7 +53,7 @@ public class CircleGraph : MonoBehaviour
             newCircle.color = nameColors[i];
             
             // 현재 name의 커밋 회수 /  전체 커밋 회수 
-            newCircle.fillAmount = CommitCntByName[i] / CommitCnt;
+            newCircle.fillAmount = (float)CommitCntByName[i] / (float)CommitCnt;
             newCircle.transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, zRotation));
             zRotation -= newCircle.fillAmount * 360.0f;
         }
