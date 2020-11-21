@@ -62,10 +62,10 @@ public class UserManager : MonoBehaviour
 
 	public string SetDepartment(int _studentNum)
 	{
-		int t = _studentNum % 1000;
-		int h = _studentNum % 100;
+		// 2013180043
+		string stunum = _studentNum.ToString();
 
-		string _department = t + h == 0 ? "게임공학과" : "엔터테이먼트컴퓨팅학과";
+		string _department = (stunum[6] == '0') ? "게임공학과" : "엔터테이먼트컴퓨팅학과";
 		department = _department;
 		return _department;
 	}

@@ -39,7 +39,6 @@ public class FillOutUserInfo : MonoBehaviour
 	{
 		yield return new WaitForSeconds(.5f);
 		float posY = backpack.GetComponent<RectTransform>().localPosition.y;
-		Debug.Log(posY);
 
 		while (posY > _targetPosY)
 		{

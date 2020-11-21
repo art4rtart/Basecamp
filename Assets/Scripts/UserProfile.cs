@@ -14,7 +14,7 @@ public class UserProfile : MonoBehaviour
 	{
 		if (userName) userName.text = UserManager.Instance.name;
 		if (userPosition) userPosition.text = UserManager.Instance.position;
-		if (userLevel) userLevel.text = UserManager.Instance.level.ToString();
+		if (userLevel) userLevel.text = "Lv." + UserManager.Instance.level;
 		if(userExp) userExp.text = UserManager.Instance.exp.ToString();
 	}
 }

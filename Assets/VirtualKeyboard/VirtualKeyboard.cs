@@ -31,24 +31,20 @@ public class VirtualKeyboard : MonoBehaviour {
 	Animator animator;
 	public InputField inputField;
 
+    RectTransform rect;
+	public float keyboardHeight = 780f;
+
 	// kr, eng, num
 	public GameObject[] keyboardTypes;
 	int previousKeyboardIndex;
+
+	public bool isActive;
 
 	void Awake()
     {
         VirtualKey._Keybord = this;
 		animator = GetComponent<Animator>();
-	}
-
-	// Use this for initialization
-	void Start () {
-        
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		//if (inputField != null) { inputField.text = VirtualTextInputBox.Instance.TextField; }
+		rect = GetComponent<RectTransform>();
 	}
 
     public void Clear()
@@ -174,6 +170,7 @@ public class VirtualKeyboard : MonoBehaviour {
 	public bool keyboardAppearStatus;
 	public void KeyboardApper(bool _show, int _keyboardType)
 	{
+		isActive = _show;
 		animator.SetBool("Show", _show);
 		keyboardAppearStatus = _show;
 
