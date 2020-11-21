@@ -36,6 +36,12 @@ public class ChattingManager : MonoBehaviour
 	int hours;
 	int minutes;
 
+	[Header("HelperPanel")]
+	public GameObject helperPanel;
+	bool isPanelPressed;
+	float pressedTimer;
+
+	public float targetPressTime = .5f;
 	private void Awake()
 	{
 		contentUserRectTransform = contents.GetComponent<RectTransform>();
@@ -44,6 +50,10 @@ public class ChattingManager : MonoBehaviour
 	private void Update()
 	{
 		if(!SwipeDetector.Instance.isSwiping) scrollrect.verticalNormalizedPosition = 0f;
+
+		if (!isPanelPressed) return;
+		if(pressedTimer < targetPressTime) pressedTimer = Mathf.Clamp(pressedTimer += Time.deltaTime, 0, targetPressTime);
+		else helperPanel.SetActive(true);
 	}
 
 	string GetTime()
@@ -62,7 +72,8 @@ public class ChattingManager : MonoBehaviour
 	Text messageTimeText;
 	Text nameText;
 
-	bool showMyname;
+
+	public bool userChatted;
 
 	public void CreateMessageBox(bool _isMyMessage, string _otherMessage)
 	{
@@ -93,6 +104,7 @@ public class ChattingManager : MonoBehaviour
 		string noSpaeMessage = message;
 		noSpaeMessage = noSpaeMessage.Replace(" ", "");
 		float letterCount = noSpaeMessage.Length;
+		float letterSize = 32 * letterCount;
 
 		// Calculate Special Letter Size
 		float specialCount = CheckingSpecialText(message);
@@ -102,13 +114,45 @@ public class ChattingManager : MonoBehaviour
 
 		if (_isMyMessage)
 		{
-			messageText.sizeDelta = new Vector2(32 * letterCount + spaceSize + specialSize, 75f);
+			messageText.sizeDelta = new Vector2(letterSize + spaceSize + specialSize, 75f);
 
 			imageBox.sizeDelta = messageText.sizeDelta + Vector2.right * 20f;
 			imageBox.localPosition = new Vector2(460f - (imageBox.sizeDelta.x - 50) / 2, 0f);
 			imageBoxCap.localPosition = new Vector2(460f - messageText.sizeDelta.x, 0f);
 
-			showMyname = true;
+			if (messageTimeText != null && messageTimeText.text == GetTime())
+			{
+				if(userChatted) messageTimeText.enabled = false;
+				name.enabled = false;
+
+				if (!userChatted && !name.enabled) name.enabled = true;
+
+				if (!userChatted)
+				{
+					_message.transform.GetComponent<RectTransform>().sizeDelta += Vector2.up * _message.transform.GetComponent<RectTransform>().sizeDelta.y;
+					_message.transform.GetChild(0).GetComponent<RectTransform>().localPosition -= Vector3.up * 50f;
+					imageBoxCap.localPosition -= Vector3.up * 50f;
+					name.GetComponent<RectTransform>().localPosition -= Vector3.up * 50f;
+
+					minusCount++;
+				}
+			}
+
+			else
+			{
+				if (!name.enabled) name.enabled = true;
+				if (nameText)
+				{
+					_message.transform.GetComponent<RectTransform>().sizeDelta += Vector2.up * _message.transform.GetComponent<RectTransform>().sizeDelta.y;
+					_message.transform.GetChild(0).GetComponent<RectTransform>().localPosition -= Vector3.up * 50f;
+					imageBoxCap.localPosition -= Vector3.up * 50f;
+					name.GetComponent<RectTransform>().localPosition -= Vector3.up * 50f;
+				}
+
+				minusCount++;
+			}
+
+			userChatted = true;
 		}
 
 		else
@@ -129,47 +173,36 @@ public class ChattingManager : MonoBehaviour
 			imageBoxCapTime.GetComponent<Text>().alignment = TextAnchor.MiddleLeft;
 			imageBoxCapRead.GetComponent<Text>().alignment = TextAnchor.MiddleLeft;
 
-			showMyname = false;
-		}
-
-		// 같은 '분' 에 작성 했을 시
-		if (messageTimeText != null && messageTimeText.text == GetTime())
-		{
-			messageTimeText.enabled = false;
-			if (showMyname) name.enabled = false;
-
-			if (!_isMyMessage)
+			if (messageTimeText != null && messageTimeText.text == GetTime())
 			{
-				if (!name.enabled)
+				if (!userChatted) messageTimeText.enabled = false;
+				name.enabled = false;
+
+				if (userChatted && !name.enabled) name.enabled = true;
+				if (userChatted)
 				{
 					_message.transform.GetComponent<RectTransform>().sizeDelta += Vector2.up * _message.transform.GetComponent<RectTransform>().sizeDelta.y;
 					_message.transform.GetChild(0).GetComponent<RectTransform>().localPosition -= Vector3.up * 50f;
 					imageBoxCap.localPosition -= Vector3.up * 50f;
 					name.GetComponent<RectTransform>().localPosition -= Vector3.up * 50f;
-
-					name.enabled = true;
+					minusCount++;
 				}
+			}
 
+			else
+			{
+				if (!name.enabled) name.enabled = true;
+				if (nameText)
+				{
+					_message.transform.GetComponent<RectTransform>().sizeDelta += Vector2.up * _message.transform.GetComponent<RectTransform>().sizeDelta.y;
+					_message.transform.GetChild(0).GetComponent<RectTransform>().localPosition -= Vector3.up * 50f;
+					imageBoxCap.localPosition -= Vector3.up * 50f;
+					name.GetComponent<RectTransform>().localPosition -= Vector3.up * 50f;
+				}
 				minusCount++;
 			}
-		}
 
-		else
-		{
-			if (!_isMyMessage)
-			{
-				_message.transform.GetComponent<RectTransform>().sizeDelta += Vector2.up * _message.transform.GetComponent<RectTransform>().sizeDelta.y;
-			}
-
-			if (nameText)
-			{
-				_message.transform.GetComponent<RectTransform>().sizeDelta += Vector2.up * _message.transform.GetComponent<RectTransform>().sizeDelta.y;
-				_message.transform.GetChild(0).GetComponent<RectTransform>().localPosition -= Vector3.up * 50f;
-				imageBoxCap.localPosition -= Vector3.up * 50f;
-				name.GetComponent<RectTransform>().localPosition -= Vector3.up * 50f;
-			}
-
-			minusCount++;
+			userChatted = false;
 		}
 
 		nameText = name;
@@ -200,12 +233,30 @@ public class ChattingManager : MonoBehaviour
 		Debug.Log("Chat Saved");
 	}
 
-	public int CheckingSpecialText(string txt)
+	public int CheckingSpecialText(string _text)
 	{
 		string str = @"[~!@\#$%^&*\()\=+|\\/:;?""<>']";
-		MatchCollection matches = System.Text.RegularExpressions.Regex.Matches(txt, str);
+		MatchCollection matches = System.Text.RegularExpressions.Regex.Matches(_text, str);
 
-		int cnt = matches.Count;
-		return cnt;
+		int count = matches.Count;
+		return count;
+	}
+
+	public void ChatPanelDown()
+	{
+		isPanelPressed = true;
+	}
+
+	public void ChatPanelUp()
+	{
+		isPanelPressed = false;
+		helperPanel.GetComponent<Animator>().SetBool("Show", false);
+		Invoke("HelperPanelOff", .5f);
+		pressedTimer = 0f;
+	}
+
+	void HelperPanelOff()
+	{
+		helperPanel.SetActive(false);
 	}
 }

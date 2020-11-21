@@ -20,6 +20,10 @@ public class UserManager : MonoBehaviour
 	public int age;
 	public string position;
 	public string department;
+	public int studentNum;
+
+	public int exp;
+	public int level;
 
 	public bool hasTeam;
 

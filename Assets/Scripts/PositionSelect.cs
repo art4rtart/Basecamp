@@ -1,39 +1,59 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PositionSelect : MonoBehaviour
 {
 	public int contentSize;
 	public int contentIndex;
 
+	Vector3 velocity;
+	Vector3 targetPoint;
+	public float smoothTime = .2f;
+
+	bool isCoroutineRunning;
+
 	public GameObject content;
+	public Animator infoAnimator;
+
+	public Image[] contentCircles;
+
+	public Color defaultColor;
+	public Color highlightColor;
+	public GameObject card;
+
+	private void OnEnable()
+	{
+		infoAnimator.enabled = true;
+	}
+
+	private void Awake()
+	{
+
+	}
 
 	public void PreviousButtonClick()
 	{
 		if (contentIndex < 1) return;
 		contentIndex = Mathf.Clamp(contentIndex -= 1, 0, contentSize);
-		Debug.Log(contentIndex);
 
 		if (isCoroutineRunning) { StopAllCoroutines(); content.transform.position = targetPoint; }
 		StartCoroutine(MoveContent(false));
+
+		SetContentColor();
 	}
 
 	public void NextButtonClick()
 	{
 		if (contentIndex > contentSize - 2) return;
 		contentIndex = Mathf.Clamp(contentIndex += 1, 0, contentSize);
-		Debug.Log(contentIndex);
 
 		if (isCoroutineRunning) { StopAllCoroutines(); content.transform.position = targetPoint; }
 		StartCoroutine(MoveContent(true));
+
+		SetContentColor();
 	}
-
-	Vector3 velocity;
-	Vector3 targetPoint;
-	public float smoothTime = .2f;
-
-	bool isCoroutineRunning;
 
 	IEnumerator MoveContent(bool _dir)
 	{
@@ -49,5 +69,22 @@ public class PositionSelect : MonoBehaviour
 
 		content.transform.position = targetPoint;
 		isCoroutineRunning = false;
+	}
+
+	void SetContentColor()
+	{
+		for (int i = 0; i < contentCircles.Length; i++)
+		{
+			contentCircles[i].color = defaultColor;
+		}
+		contentCircles[contentIndex].color = highlightColor;
+	}
+
+	public void SelectThisPosition(string _positionName)
+	{
+		UserManager.Instance.position = _positionName;
+		card.transform.gameObject.SetActive(true);
+		card.transform.GetChild(0).GetComponent<Text>().text = _positionName;
+		this.gameObject.SetActive(false);
 	}
 }

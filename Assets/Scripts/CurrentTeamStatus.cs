@@ -22,7 +22,5 @@ public class CurrentTeamStatus : MonoBehaviour
 		bool recruited = UserManager.Instance.hasVolunteer ? true : false;
 		volunteer.SetActive(recruited);
 		noVolunteer.SetActive(!recruited);
-
-		Debug.Log("HI");
 	}
 }

@@ -26,11 +26,15 @@ public class SwipeDetector : MonoBehaviour
 
     public static event Action<SwipeData> OnSwipe = delegate { };
 
+	public Vector3 touchPos;
+
     private void Update()
     {
 		foreach (Touch touch in Input.touches)
         {
-            if (touch.phase == TouchPhase.Began)
+			touchPos = touch.position;
+
+			if (touch.phase == TouchPhase.Began)
             {
                 fingerUpPosition = touch.position;
                 fingerDownPosition = touch.position;
@@ -57,6 +61,7 @@ public class SwipeDetector : MonoBehaviour
 
 	public bool isSwiping = false;
 	public TextMeshProUGUI tmpro;
+	public SwipeDirection swipeDir;
 
     private void DetectSwipe()
     {
