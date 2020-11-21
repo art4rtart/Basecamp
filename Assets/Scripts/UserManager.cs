@@ -22,8 +22,8 @@ public class UserManager : MonoBehaviour
 	public string department;
 	public int studentNum;
 
-	public int exp;
-	public int level;
+	public int exp = 0;
+	public int level = 1;
 
 	public bool hasTeam;
 
@@ -31,6 +31,13 @@ public class UserManager : MonoBehaviour
 	public bool hasVolunteer;
 
 	public float timeLeft;
+
+	private void Awake()
+	{
+		if (instance == null) instance = this;
+		else if (instance != this) Destroy(gameObject);
+		DontDestroyOnLoad(gameObject);
+	}
 
 	private void Update()
 	{
@@ -51,5 +58,15 @@ public class UserManager : MonoBehaviour
 	{
 		if (teamInfo == TeamInfoDisplayer.Instance.teamInfo) { Debug.Log("this is applyed team");  return true; }
 		else return false;
+	}
+
+	public string SetDepartment(int _studentNum)
+	{
+		int t = _studentNum % 1000;
+		int h = _studentNum % 100;
+
+		string _department = t + h == 0 ? "게임공학과" : "엔터테이먼트컴퓨팅학과";
+		department = _department;
+		return _department;
 	}
 }

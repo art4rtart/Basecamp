@@ -12,9 +12,9 @@ public class UserProfile : MonoBehaviour
 
 	private void Awake()
 	{
-		userName.text = UserManager.Instance.name;
-		//userPosition.text = UserManager.Instance.position;
-		//userLevel.text = UserManager.Instance.level.ToString();
-		//userExp.text = UserManager.Instance.exp.ToString();
+		if (userName) userName.text = UserManager.Instance.name;
+		if (userPosition) userPosition.text = UserManager.Instance.position;
+		if (userLevel) userLevel.text = UserManager.Instance.level.ToString();
+		if(userExp) userExp.text = UserManager.Instance.exp.ToString();
 	}
 }

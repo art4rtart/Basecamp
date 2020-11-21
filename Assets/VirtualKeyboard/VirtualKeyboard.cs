@@ -134,11 +134,6 @@ public class VirtualKeyboard : MonoBehaviour {
                     break;
 
 				case VirtualKey.kType.KHide:
-
-					// name
-
-					Debug.Log(Backpack.Instance.askItemIndex);
-
 					if(Backpack.Instance.askItemIndex == 0)
 					{
 						UserManager.Instance.name = inputField.text;
@@ -154,18 +149,9 @@ public class VirtualKeyboard : MonoBehaviour {
 					else if(Backpack.Instance.askItemIndex == 2)
 					{
 						UserManager.Instance.studentNum = int.Parse(inputField.text);
+						UserManager.Instance.SetDepartment(UserManager.Instance.studentNum);
 						Backpack.Instance.studentNumCardText.text = UserManager.Instance.studentNum.ToString();
 					}
-
-					//if (!Backpack.Instance.studentNumChecked)
-					//{
-					//	UserManager.Instance.studentNum = int.Parse(inputField.text);
-					//	Backpack.Instance.studentNumCardText.text = UserManager.Instance.studentNum.ToString();
-					//}
-
-					//// student num
-					//UserManager.Instance.studentNum = int.Parse(inputField.text);
-					//Backpack.Instance.studentNumCardText.text = UserManager.Instance.studentNum.ToString();
 
 					KeyboardApper(false, (int)KeyType);
 					VirtualTextInputBox.Instance.TextField = null;
