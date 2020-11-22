@@ -51,7 +51,7 @@ public class TransitionController : MonoBehaviour
 		for (int i = 0; i < this.transform.childCount; i++)
 		{
 			logShaderControl[i] = this.transform.GetChild(i).GetComponent<LogShaderControl>();
-			logShaderControl[i].SetLogColor(UserManager.Instance.transitionMatColor[i]);
+			//logShaderControl[i].SetLogColor(UserManager.Instance.transitionMatColor[i]);
 			//Debug.Log(logShaderControl[i].GetLogColor());
 		}
 	}

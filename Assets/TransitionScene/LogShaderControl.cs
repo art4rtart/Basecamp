@@ -16,6 +16,7 @@ public class LogShaderControl : MonoBehaviour
         mRectTrans = GetComponent<RectTransform>();
         mMat = Instantiate(mImage.material);
         mImage.material = mMat;
+		mMat.SetFloat("_CanvasPositionY", mRectTrans.anchoredPosition.y);
     }
 
 	private void Start()
