@@ -30,6 +30,6 @@ public class ReportSave : MonoBehaviour
     
     public void OnClick()
     {
-        Debug.Log("안녕하세요.");
+        
     }
 }

@@ -32,6 +32,7 @@ public class JsonNET : MonoBehaviour
         Graph = GameObject.Find("Graph");
         Commit_Content = GameObject.Find("Commit_Content");
 
+
         StartCoroutine(Github_GET());
     }
 
@@ -72,13 +73,13 @@ public class JsonNET : MonoBehaviour
 
             //string temp = myDeserializedClass[0].commit.author.name;
 
-            
+            char separatorChar = '\n';
             for (int k = 0; k < myDeserializedClass.Count; ++k)
             {
                 // Message Array
                 CommitMessage[k].name = myDeserializedClass[k].commit.author.name;
             
-                CommitMessage[k].message = myDeserializedClass[k].commit.message;
+                CommitMessage[k].message = myDeserializedClass[k].commit.message.Split(separatorChar)[0];
             
                 CommitMessage[k].data = myDeserializedClass[k].commit.author.date;
             }
@@ -86,6 +87,7 @@ public class JsonNET : MonoBehaviour
             nameColors = new Color[names.Length];
             nameColors[0] = Color.white;
             nameColors[1] = Color.red;
+            nameColors[2] = Color.green;
 
             // 전체 커밋 회수
             CommitCnt = myDeserializedClass.Count;
