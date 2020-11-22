@@ -30,14 +30,15 @@ public class LogShaderControl : MonoBehaviour
 		mMat.SetFloat("_CanvasPositionY", mRectTrans.anchoredPosition.y);
 	}
 
-
-	public void SetLogColor(float _color)
+	public void UpdateLogPos(float pos)
 	{
-		mMat.SetFloat("_CanvasPositionY", _color);
+		mRectTrans.anchoredPosition = new Vector2(mRectTrans.anchoredPosition.x, pos);
+		mMat.SetFloat("_CanvasPositionY", mRectTrans.anchoredPosition.y);
 	}
 
-	public float GetLogColor()
+	public float GetLogPos()
 	{
 		return mMat.GetFloat("_CanvasPositionY");
+
 	}
 }

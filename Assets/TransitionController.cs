@@ -22,36 +22,37 @@ public class TransitionController : MonoBehaviour
 	private void Awake()
 	{
 		animator = GetComponent<Animator>();
-		if (isEnd) SetColor();
+		if (isEnd) SetLogPos();
 	}
 
 	public void StartTransition(bool _start)
 	{
 		string _trigger = _start ? "Start" : "End";
 		animator.SetTrigger(_trigger);
-		Invoke("GetColor", 1f);
+		Invoke("GetPosition", 1f);
 	}
 
-	void GetColor()
+	void GetPosition()
 	{
 		logShaderControl = new LogShaderControl[transform.childCount];
 		UserManager.Instance.transitionMatColor = new float[transform.childCount];
 
-		for (int i = 0; i < this.transform.childCount; i++)
+		for (int i = 0; i < this.transform.childCount; ++i)
 		{
 			logShaderControl[i] = this.transform.GetChild(i).GetComponent<LogShaderControl>();
-			UserManager.Instance.transitionMatColor[i] = logShaderControl[i].GetLogColor();
+			UserManager.Instance.transitionMatColor[i] = logShaderControl[i].GetLogPos();
 		}
 	}
 
-	void SetColor()
+	void SetLogPos()
 	{
 		logShaderControl = new LogShaderControl[transform.childCount];
 
-		for (int i = 0; i < this.transform.childCount; i++)
+		for (int i = 0; i < this.transform.childCount; ++i)
 		{
 			logShaderControl[i] = this.transform.GetChild(i).GetComponent<LogShaderControl>();
-			//logShaderControl[i].SetLogColor(UserManager.Instance.transitionMatColor[i]);
+			logShaderControl[i].UpdateLogPos(UserManager.Instance.transitionMatColor[i]);
+			//Debug.Log(i);
 			//Debug.Log(logShaderControl[i].GetLogColor());
 		}
 	}
