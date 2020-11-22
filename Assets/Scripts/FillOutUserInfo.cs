@@ -16,11 +16,6 @@ public class FillOutUserInfo : MonoBehaviour
 		StartCoroutine(MoveDown(230f, 700f));
 	}
 
-	public void GoToTeamBuild(string _sceneName)
-	{
-		SceneManager.LoadScene(_sceneName);
-	}
-
 	IEnumerator FadeOut(float _fadeSpeed)
 	{
 		float alpha = 1f;

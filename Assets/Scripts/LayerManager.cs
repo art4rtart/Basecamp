@@ -38,7 +38,11 @@ public class LayerManager : MonoBehaviour
 
 	int layerIndex;
 	public GameObject[] layers;
-
+	public bool isLogo;
+	private void Awake()
+	{
+		if(isLogo) fadeImageAnimator.SetTrigger("FadeIn");
+	}
 	public void ShowNextLayer()
 	{
 		previousLayer.SetActive(false);

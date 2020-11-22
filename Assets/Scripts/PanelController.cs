@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System;
 
 public class PanelController : MonoBehaviour
@@ -62,5 +63,18 @@ public class PanelController : MonoBehaviour
 		yield return new WaitForSeconds(_waitTime);
 		if (!UserManager.Instance.hasTeam) GoNextLayer(nextLayerIndex);
 		else GoNextLayer(nextLayerIndex + 1);
+	}
+
+	string sceneName;
+	public void GoToNextScene(string _sceneName)
+	{
+		TransitionController.Instance.StartTransition(true);
+		sceneName = _sceneName;
+		Invoke("LoadSceneAfterSeconds", 1f);
+	}
+
+	void LoadSceneAfterSeconds()
+	{
+		SceneManager.LoadScene(sceneName);
 	}
 }

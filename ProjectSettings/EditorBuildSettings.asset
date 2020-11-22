@@ -6,12 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/1. UserInfo.unity
+    path: Assets/Scenes/1.UserInfo.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/2.TeamBuild.unity
+    guid: 9e2cdfdc4f344834f96c1bedab57f17a
+  - enabled: 1
+    path: Assets/Scenes/3.TeamPlay.unity
+    guid: 8397086ec8ce99f40a37cc074214ca39
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/Scenes/2.TeamBuilding.unity
-    guid: 9e2cdfdc4f344834f96c1bedab57f17a
   m_configObjects: {}

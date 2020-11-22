@@ -32,6 +32,8 @@ public class UserManager : MonoBehaviour
 
 	public float timeLeft;
 
+	public float[] transitionMatColor;
+
 	private void Awake()
 	{
 		if (instance == null) instance = this;
