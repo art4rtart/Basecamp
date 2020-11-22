@@ -73,13 +73,13 @@ public class JsonNET : MonoBehaviour
 
             //string temp = myDeserializedClass[0].commit.author.name;
 
-            
+            char separatorChar = '\n';
             for (int k = 0; k < myDeserializedClass.Count; ++k)
             {
                 // Message Array
                 CommitMessage[k].name = myDeserializedClass[k].commit.author.name;
             
-                CommitMessage[k].message = myDeserializedClass[k].commit.message;
+                CommitMessage[k].message = myDeserializedClass[k].commit.message.Split(separatorChar)[0];
             
                 CommitMessage[k].data = myDeserializedClass[k].commit.author.date;
             }
