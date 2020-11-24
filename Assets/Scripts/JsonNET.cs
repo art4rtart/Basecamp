@@ -16,7 +16,7 @@ public class JsonNET : MonoBehaviour
 {
     public Image circlePrefab;
     public GameObject CommitBoxPrefab;
-
+    
     public string[] names;
     public Color[] nameColors;              // 색상
     public int[] CommitCntByName;
@@ -81,7 +81,7 @@ public class JsonNET : MonoBehaviour
             
                 CommitMessage[k].message = myDeserializedClass[k].commit.message.Split(separatorChar)[0];
             
-                CommitMessage[k].data = myDeserializedClass[k].commit.author.date;
+                CommitMessage[k].date = myDeserializedClass[k].commit.author.date;
             }
 
             nameColors = new Color[names.Length];
@@ -140,7 +140,7 @@ public class JsonNET : MonoBehaviour
 
             newCommitBox.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = CommitMessage[i].message;
             
-            string myConvertedDate = CommitMessage[i].data.ToString("yyyy/MM/dd hh:mm:ss");
+            string myConvertedDate = CommitMessage[i].date.ToString("yyyy/MM/dd hh:mm:ss");
             newCommitBox.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = myConvertedDate;
         }
     }
@@ -165,12 +165,11 @@ public class MyArray
     public Commit commit { get; set; }
 }
 
-
 public class CommitMessage
 {
     public string name;
     public string message;
-    public DateTime data;
+    public DateTime date;
 }
 
 public static class Untility

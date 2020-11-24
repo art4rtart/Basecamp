@@ -61,7 +61,7 @@ public class Packet : IDisposable
         Write(_id); // Write packet id to the buffer
     }
 
-    /// <summary>Creates a packet from which data can be read. Used for receiving.</summary>
+    /// <summary>Creates a packet from which date can be read. Used for receiving.</summary>
     /// <param name="_data">The bytes to add to the packet.</param>
     public Packet(byte[] _data)
     {
@@ -106,7 +106,7 @@ public class Packet : IDisposable
         return buffer.Count; // Return the length of buffer
     }
 
-    /// <summary>Gets the length of the unread data contained in the packet.</summary>
+    /// <summary>Gets the length of the unread date contained in the packet.</summary>
     public int UnreadLength()
     {
         return Length() - readPos; // Return the remaining length (unread)

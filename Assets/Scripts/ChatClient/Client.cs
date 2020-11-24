@@ -110,7 +110,7 @@ public class Client : MonoBehaviour
             stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
         }
 
-        /// <summary>Sends data to the client via TCP.</summary>
+        /// <summary>Sends date to the client via TCP.</summary>
         /// <param name="_packet">The packet to send.</param>
         public void SendData(Packet _packet)
         {
@@ -118,16 +118,16 @@ public class Client : MonoBehaviour
             {
                 if (socket != null)
                 {
-                    stream.BeginWrite(_packet.ToArray(), 0, _packet.Length(), null, null); // Send data to server
+                    stream.BeginWrite(_packet.ToArray(), 0, _packet.Length(), null, null); // Send date to server
                 }
             }
             catch (Exception _ex)
             {
-                Debug.Log($"Error sending data to server via TCP: {_ex}");
+                Debug.Log($"Error sending date to server via TCP: {_ex}");
             }
         }
 
-        /// <summary>Reads incoming data from the stream.</summary>
+        /// <summary>Reads incoming date from the stream.</summary>
         private void ReceiveCallback(IAsyncResult _result)
         {
             try
@@ -142,7 +142,7 @@ public class Client : MonoBehaviour
                 byte[] _data = new byte[_byteLength];
                 Array.Copy(receiveBuffer, _data, _byteLength);
 
-                receivedData.Reset(HandleData(_data)); // Reset receivedData if all data was handled
+                receivedData.Reset(HandleData(_data)); // Reset receivedData if all date was handled
                 stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
             }
             catch
@@ -151,8 +151,8 @@ public class Client : MonoBehaviour
             }
         }
 
-        /// <summary>Prepares received data to be used by the appropriate packet handler methods.</summary>
-        /// <param name="_data">The recieved data.</param>
+        /// <summary>Prepares received date to be used by the appropriate packet handler methods.</summary>
+        /// <param name="_data">The recieved date.</param>
         private bool HandleData(byte[] _data)
         {
             int _packetLength = 0;
@@ -161,18 +161,18 @@ public class Client : MonoBehaviour
 
             if (receivedData.UnreadLength() >= 4)
             {
-                // If client's received data contains a packet
+                // If client's received date contains a packet
                 _packetLength = receivedData.ReadInt();
                 if (_packetLength <= 0)
                 {
-                    // If packet contains no data
+                    // If packet contains no date
                     return true; // Reset receivedData instance to allow it to be reused
                 }
             }
 
             while (_packetLength > 0 && _packetLength <= receivedData.UnreadLength())
             {
-                // While packet contains data AND packet data length doesn't exceed the length of the packet we're reading
+                // While packet contains date AND packet date length doesn't exceed the length of the packet we're reading
                 byte[] _packetBytes = receivedData.ReadBytes(_packetLength);
                 ThreadManager.ExecuteOnMainThread(() =>
                 {
@@ -186,11 +186,11 @@ public class Client : MonoBehaviour
                 _packetLength = 0; // Reset packet length
                 if (receivedData.UnreadLength() >= 4)
                 {
-                    // If client's received data contains another packet
+                    // If client's received date contains another packet
                     _packetLength = receivedData.ReadInt();
                     if (_packetLength <= 0)
                     {
-                        // If packet contains no data
+                        // If packet contains no date
                         return true; // Reset receivedData instance to allow it to be reused
                     }
                 }
@@ -241,7 +241,7 @@ public class Client : MonoBehaviour
             }
         }
 
-        /// <summary>Sends data to the client via UDP.</summary>
+        /// <summary>Sends date to the client via UDP.</summary>
         /// <param name="_packet">The packet to send.</param>
         public void SendData(Packet _packet)
         {
@@ -255,11 +255,11 @@ public class Client : MonoBehaviour
             }
             catch (Exception _ex)
             {
-                Debug.Log($"Error sending data to server via UDP: {_ex}");
+                Debug.Log($"Error sending date to server via UDP: {_ex}");
             }
         }
 
-        /// <summary>Receives incoming UDP data.</summary>
+        /// <summary>Receives incoming UDP date.</summary>
         private void ReceiveCallback(IAsyncResult _result)
         {
             try
@@ -281,8 +281,8 @@ public class Client : MonoBehaviour
             }
         }
 
-        /// <summary>Prepares received data to be used by the appropriate packet handler methods.</summary>
-        /// <param name="_data">The recieved data.</param>
+        /// <summary>Prepares received date to be used by the appropriate packet handler methods.</summary>
+        /// <param name="_data">The recieved date.</param>
         private void HandleData(byte[] _data)
         {
             using (Packet _packet = new Packet(_data))
@@ -311,7 +311,7 @@ public class Client : MonoBehaviour
         }
     }
 
-    /// <summary>Initializes all necessary client data.</summary>
+    /// <summary>Initializes all necessary client date.</summary>
     private void InitializeClientData()
     {
         packetHandlers = new Dictionary<int, PacketHandler>()
