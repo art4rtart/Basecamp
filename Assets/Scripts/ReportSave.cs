@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 using UnityEngine.Networking;
 
@@ -29,6 +30,18 @@ public class ReportSave : MonoBehaviour
     GameObject URLInput;
 
     [SerializeField]
+    GameObject ReportBoxPrefab;
+
+    [SerializeField]
+    GameObject ReportContent;
+
+    [SerializeField]
+    GameObject SaveReportLayerPrefab;
+
+    [SerializeField]
+    GameObject SaveReportPool;
+
+    [SerializeField]
     GameObject[] WorkList;
 
     // Start is called before the first frame update
@@ -53,6 +66,30 @@ public class ReportSave : MonoBehaviour
         data.url = URLInput.transform.GetComponent<TMP_InputField>().text;
         data.date = DateTime.Now.ToString(("yyyy-MM-dd"));
 
+        var newReportBox = Instantiate(ReportBoxPrefab);
+
+        newReportBox.transform.SetParent(ReportContent.transform, false);
+        newReportBox.transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f));
+
+        newReportBox.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = data.weekend;
+        newReportBox.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = data.url;
+        newReportBox.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = data.date;
+
+        var newSaveReportLayer = Instantiate(SaveReportLayerPrefab) as GameObject;
+
+        newSaveReportLayer.transform.SetParent(SaveReportPool.transform, false);
+        newSaveReportLayer.transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f));
+
+        newSaveReportLayer.transform.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = data.name;
+        newSaveReportLayer.transform.GetChild(3).GetChild(1).GetComponent<TextMeshProUGUI>().text = data.team;
+        newSaveReportLayer.transform.GetChild(4).GetChild(1).GetComponent<TextMeshProUGUI>().text = data.weekend;
+        newSaveReportLayer.transform.GetChild(4).GetChild(3).GetComponent<TextMeshProUGUI>().text = data.date;
+        newSaveReportLayer.transform.GetChild(5).GetChild(1).GetComponent<TextMeshProUGUI>().text = data.url;
+
+        int _i = ReportContent.transform.childCount-1;
+        Debug.Log(_i);
+        newReportBox.transform.GetComponent<Button>().onClick.AddListener(delegate () { OnClick(_i); });
+
         if (File.Exists(Application.dataPath + "/data.json") == false)
         {
             string jsonString = JsonConvert.SerializeObject(data);
@@ -76,6 +113,12 @@ public class ReportSave : MonoBehaviour
         WeekendInput.transform.GetComponent<TMP_InputField>().text = null;
         URLInput.transform.GetComponent<TMP_InputField>().text = null;
         DateInput.transform.GetComponent<TextMeshProUGUI>().text = null;
+    }
+
+    public void OnClick(int num)
+    {
+        SaveReportPool.transform.GetChild(num).gameObject.SetActive(true);
+        Debug.Log(num);
     }
 }
 

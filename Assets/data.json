@@ -1,16 +1,1 @@
-[
-  {
-    "name": "1",
-    "team": "1",
-    "weekend": "1",
-    "url": "1",
-    "date": "2020-11-24"
-  },
-  {
-    "name": "2",
-    "team": "2",
-    "weekend": "2",
-    "url": "2",
-    "date": "2020-11-24"
-  }
-]
+[{"name":"1","team":"1","weekend":"1","url":"1","date":"2020-11-24"},{"name":"2","team":"2","weekend":"2","url":"2","date":"2020-11-24"},{"name":"b","team":"b","weekend":"b","url":"b","date":"2020-11-25"},{"name":"1","team":"1","weekend":"1","url":"1","date":"2020-11-26"},{"name":"3","team":"3","weekend":"3","url":"3","date":"2020-11-26"},{"name":"4","team":"4","weekend":"4","url":"4","date":"2020-11-26"},{"name":"YS","team":"YS","weekend":"YS","url":"YS","date":"2020-11-26"},{"name":"BJ","team":"BJ","weekend":"BJ","url":"BJ","date":"2020-11-26"},{"name":"WJ","team":"WJ","weekend":"WJ","url":"WJ","date":"2020-11-26"},{"name":"TEST","team":"TEST","weekend":"TEST","url":"TEST","date":"2020-11-26"},{"name":"AA","team":"AA","weekend":"AA","url":"AA","date":"2020-11-26"},{"name":"BB","team":"BB","weekend":"BB","url":"BB","date":"2020-11-26"},{"name":"CC","team":"CC","weekend":"CC","url":"CC","date":"2020-11-26"},{"name":"tt","team":"tt","weekend":"tt","url":"tt","date":"2020-11-26"},{"name":"abd","team":"abd","weekend":"abd","url":"abd","date":"2020-11-26"},{"name":"twer","team":"twer","weekend":"twer","url":"twer","date":"2020-11-26"}]
