@@ -23,6 +23,7 @@ public class TransitionController : MonoBehaviour
 	{
 		animator = GetComponent<Animator>();
 		if (isEnd) SetLogPos();
+		UserManager.Instance.transitionMatColor = new float[transform.childCount];
 	}
 
 	public void StartTransition(bool _start)
@@ -51,7 +52,7 @@ public class TransitionController : MonoBehaviour
 		for (int i = 0; i < this.transform.childCount; ++i)
 		{
 			logShaderControl[i] = this.transform.GetChild(i).GetComponent<LogShaderControl>();
-			logShaderControl[i].UpdateLogPos(UserManager.Instance.transitionMatColor[i]);
+			if(UserManager.Instance.transitionMatColor != null) logShaderControl[i].UpdateLogPos(UserManager.Instance.transitionMatColor[i]);
 			//Debug.Log(i);
 			//Debug.Log(logShaderControl[i].GetLogColor());
 		}

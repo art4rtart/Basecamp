@@ -13103,7 +13103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e68ff243383314fa00bf7beed00edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resolution: {x: 1080, y: 2220}
+  resolution: {x: 405, y: 832.5}
 --- !u!114 &480314718
 MonoBehaviour:
   m_ObjectHideFlags: 0

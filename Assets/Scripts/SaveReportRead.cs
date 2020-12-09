@@ -24,8 +24,5 @@ public class SaveReportRead : MonoBehaviour
     {
 
     }
-    public void OnClick()
-    {
-        SaveReportPool.transform.GetChild(0).gameObject.SetActive(true);
-    }
+    
 }
